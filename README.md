@@ -43,12 +43,23 @@ A projekt elkészítése szigorúan követi a feladatkiírásban meghatározott 
 ```bash
 git clone <repository-url>
 cd trustindex_dev
+# Automatikus setup indítása (Composer, SQLite generálás és Migrációk)
+./setup.sh
+```
+### Manuális telepítés (Alternatív útvonal)
+```bash
 composer install
 composer require --dev friendsofphp/php-cs-fixer
 php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:migrations:migrate --no-interaction
+```
+### Kódstílus ellenőrzése
+```bash
 vendor/bin/php-cs-fixer fix src
 vendor/bin/php-cs-fixer fix tests
+```
+### Fejlesztői szerver futtatása
+```bash
 php -S 127.0.0.1:8000 -t public
 ```
 
