@@ -1,0 +1,36 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+# --- SQLite Adatbázis elrejtése ---
+# Ez biztosítja, hogy a helyi tesztadatbázisod ne kerüljön fel Gitbe
+/var/data.db
+/var/data.db-journal
+
+# --- Fejlesztői környezetek (IDE) ---
+/.idea/
+/.vscode/
+.DS_Store
+
