@@ -22,12 +22,27 @@ Ez egy leegyszerűsített, de valós üzleti logikát tükröző cégértékelő
 
 ---
 
+## ⏱️ Munkaidő-napló (Worklog)
+
+A projekt elkészítése szigorúan követi a feladatkiírásban meghatározott logikai mérföldköveket és a Clean Code elveket.
+
+| Fázis / Feladat | Leírás | Becsült idő | Tényleges idő |
+| :--- | :--- | :---: | :---: |
+| **1. Tervezés & Környezet** | Projekt inicializálása Composerrel, `.gitignore` beállítása, SQLite adatbázis konfiguráció. | 0.5 óra | 0.5 óra |
+| **2. Adatmodell & Migráció** | `Review` entitás elkészítése PHP 8 natív attribútumokkal, Lifecycle Callback-ek (`created_at`, `updated_at`) és a hozzá tartozó migráció generálása. | 1.0 óra | 0.75 óra |
+| **3. Form & Üzleti Logika** | `ReviewType` form osztály elkészítése, szerveroldali validációs szabályok (`Assert\Range`, `Assert\Email`) beállítása, Controller és Twig nézetek összekötése. | 1.5 óra | 1.25 óra |
+| **4. Statisztika & Bónusz** | `ReviewRepository` DQL lekérdezés megírása (cégenkénti csoportosítás, átlagszámítás és rendezés). Kereső funkció implementálása. | 1.0 óra | 1.0 óra |
+| **5. Extra (Subscriber & UI)** | Modern Material Design (MDBootstrap) felület kialakítása és a `BadReviewSubscriber` (Doctrine Event Listener) integrálása a negatív vélemények logolására. | 1.0 óra | 0.75 óra |
+| **6. Minőségbiztosítás** | `PHPUnit` Unit és Funkcionális tesztek megírása (statisztika, rendezés, form beküldés). Kódstílus szabványosítás `php-cs-fixer`-rel (PSR-12). | 1.0 óra | 0.75 óra |
+| **Összesen** | | **6.0 óra** | **5.0 óra** |
+
+
 ## Telepítés és Futtatás lépésről lépésre
 
 ### 1. Repository klónozása
 ```bash
 git clone <repository-url>
-cd trustindex-test
+cd trustindex_dev
 composer install
 composer require --dev friendsofphp/php-cs-fixer
 php bin/console doctrine:database:create --if-not-exists
