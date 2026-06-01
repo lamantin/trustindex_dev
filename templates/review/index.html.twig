@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Vélemények</h2>
+
+            <form method="get" action="{{ path('app_home') }}" class="mb-4 d-flex">
+                <input type="text" name="q" value="{{ searchQuery }}" class="form-control me-2" placeholder="Keresés cég neve alapján...">
+                <button type="submit" class="btn btn-secondary">Keresés</button>
+                {% if searchQuery %}
+                    <a href="{{ path('app_home') }}" class="btn btn-link">Alaphelyzet</a>
+                {% endif %}
+            </form>
+
+            {% for review in reviews %}
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('app_review_show', {id: review.id}) }}" class="text-decoration-none text-dark">
+                                {{ review.companyName }}
+                            </a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-warning">
+                            {# Csillagok kirajzolása (2.2) #}
+                            {% for i in 1..5 %}
+                                {{ i <= review.rating ? '★' : '☆' }}
+                            {% endfor %}
+                        </h6>
+                        <p class="card-text">{{ review.reviewText|length > 150 ? review.reviewText|slice(0, 150) ~ '...' : review.reviewText }}</p>
+                        <div class="text-muted small">
+                            Beküldte: {{ review.authorEmail }} | {{ review.createdAt|date('Y-m-d H:i') }}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-muted">Nem található beérkezett vélemény.</p>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-5">
+            <div class="card p-4 shadow-sm position-sticky" style="top: 20px;">
+                <h3>Új vélemény írása</h3>
+                {{ form_start(form) }}
+                <div class="mb-3">{{ form_row(form.companyName) }}</div>
+                <div class="mb-3">{{ form_row(form.rating) }}</div>
+                <div class="mb-3">{{ form_row(form.reviewText) }}</div>
+                <div class="mb-3">{{ form_row(form.authorEmail) }}</div>
+                <button type="submit" class="btn btn-primary w-100">Vélemény elküldése</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

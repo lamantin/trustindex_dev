@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ review.companyName }} - Értékelés{% endblock %}
+
+{% block body %}
+    <div class="card shadow-sm col-md-8 mx-auto">
+        <div class="card-body">
+            <a href="{{ path('app_home') }}" class="btn btn-sm btn-outline-secondary mb-3">&larr; Vissza a főoldalra</a>
+            <h1 class="card-title">{{ review.companyName }}</h1>
+            <h3 class="text-warning mb-3">
+                {% for i in 1..5 %}
+                    {{ i <= review.rating ? '★' : '☆' }}
+                {% endfor %}
+            </h3>
+            <p class="lead bg-light p-3 rounded" style="white-space: pre-wrap;">{{ review.reviewText }}</p>
+            <hr>
+            <div class="text-muted">
+                <strong>Szerző:</strong> {{ review.authorEmail }}<br>
+                <strong>Időpont:</strong> {{ review.createdAt|date('Y-m-d H:i:s') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
